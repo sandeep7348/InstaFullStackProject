@@ -1,0 +1,16 @@
+const express=require("express")
+const app=express()
+const connectDB=require("./database")
+const authRoutes=require("./routes/auth.routes")
+const cors=require("cors")
+connectDB()
+app.use(cors())
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
+app.use("/auth",authRoutes)
+app.get("/",(req,res)=>{
+    res.send("welcome to my insta project")
+})
+app.listen(3000,()=>{
+    console.log("server is running")
+})
