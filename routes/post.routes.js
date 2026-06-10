@@ -5,7 +5,7 @@ const ImageKit = require("@imagekit/nodejs");
 
 const Post = require("../models/post.models.js");
 const User = require("../models/user.model.js");
-const { IdentifyUser } = require("../middlewares/post.middleware.js");
+const IdentifyUser  = require("../middlewares/post.middleware.js");
 
 const imagekit = new ImageKit({
     publicKey: process.env.IMAGE_KIT_PUBLIC_KEY,

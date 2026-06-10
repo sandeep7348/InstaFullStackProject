@@ -2,7 +2,7 @@ const express=require("express")
 const router=express.Router()
 const User=require("../models/user.model")
 const Followers=require("../models/follower.model")
-const IdentifyUser=require("../middleware/IdentifyUser")
+const IdentifyUser=require("../middlewares/post.middleware")
 
 router.post("/follow/:username",IdentifyUser,async(req,res)=>{
     try{
