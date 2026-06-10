@@ -10,8 +10,7 @@ const likeSchema=new mongoose.Schema({
         required:[true,"post_id is required"]
     },
     user:{
-        type:ObjectId,
-        ref:"User",
+        type:String,
         required:[true,"user_id is required"]
     }
 },{timestamps:true
