@@ -14,6 +14,6 @@ const followersSchema=new mongoose.Schema({
         required:[true,"followee is required"]
     }
 },{timestamps:true})
-
+followersSchema.index({follower:1,followee:1},{unique:true})
 
 module.exports=mongoose.model("Followers",followersSchema)
