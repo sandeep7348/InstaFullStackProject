@@ -8,7 +8,7 @@ const Like=require("../models/like.model.js")
 router.post("/like/:postId",IdentifyUser,async(req,res)=>{
       try{
           const postId=req.params.postId
-            const post=await Post.find({_id:postId})
+            const post=await Post.findById(postId)
             if(!post){
                 return res.status(404).json({message:"post not found"})
             }
@@ -27,7 +27,7 @@ router.post("/like/:postId",IdentifyUser,async(req,res)=>{
 router.post("/unlike/:postId",IdentifyUser,async(req,res)=>{
       try{
           const postId=req.params.postId
-            const post=await Post.find({_id:postId})
+            const post=await Post.findById(postId)
             if(!post){
                 return res.status(404).json({message:"post not found"})
             }
