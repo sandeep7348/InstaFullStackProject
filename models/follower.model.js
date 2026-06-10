@@ -12,6 +12,12 @@ const followersSchema=new mongoose.Schema({
         type:ObjectId,
         ref:"User" ,
         required:[true,"followee is required"]
+    },
+    status:{
+        type:String,
+        default:"pending",
+        enum:{values:["pending","accepted","rejected"], message:"Invalid status value"}
+
     }
 },{timestamps:true})
 followersSchema.index({follower:1,followee:1},{unique:true})
