@@ -50,10 +50,7 @@ router.post(
             const newPost = new Post({
                 caption,
                 img_url: uploadedFile.url,
-                user_id: {
-                    _id: user._id,
-                    username: user.username
-                }
+                user: user._id
             });
 
             const savedPost = await newPost.save();
@@ -74,8 +71,8 @@ router.post(
 router.get("/posts", IdentifyUser, async (req, res) => {
     try {
         const posts = await Post.find({
-            "user_id._id": req.user.id
-        });
+            "user": req.user.id
+        }).populate("user")
 
         res.status(200).json(posts);
 
@@ -87,11 +84,27 @@ router.get("/posts", IdentifyUser, async (req, res) => {
         });
     }
 });
+router.get("/allposts",IdentifyUser,async (req,res)=>{
+    try{
+        const posts=await Post.find().populate("user")
+        return res.status(200).json({
+            success:true,
+            message:"all post fetched succeesfully",
+            posts:posts
+        })
+    }
+    catch(error){
+        return res.status(500).json({
+            success:true,
+            message:"Unable to fetch the data"
+        })
+    }
+})
 
 
 router.get("/posts/:postId", IdentifyUser, async (req, res) => {
     try {
-        const post = await Post.findById(req.params.postId);
+        const post = await Post.findById(req.params.postId).populate("user");
 
         if (!post) {
             return res.status(404).json({
